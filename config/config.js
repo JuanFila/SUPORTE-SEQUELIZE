@@ -1,10 +1,12 @@
 module.exports = {
     dialect: "postgres",
-    host: "localhost",
-    username: "juan",
-    password: "2771az",
+    username: "postgres",
+    port: 5432,
+    host: "127.0.0.1",
+    password: "2771",
     database: "curso_sequelize",
     define: {
       timestamps: true,
     },
   };
+
