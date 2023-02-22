@@ -1,7 +1,27 @@
+const Cap = require("../models/Cap");
 const Planet = require("../models/Planet");
 const Satelite = require("../models/Satelite");
+const Spaceship = require("../models/Spaceship");
 
-Planet.hasOne(Satelite, {onDelete: "CASCADE", onUpdate: "CASCADE"});
-Satelite.belongsTO(Planet, {foreigKey: "planetId", as: "planet"});
+// Has one
+// Planet.hasOne(Satelite, { onDelete: "CASCADE", onUpdate: "CASCADE" });
+// Satelite.belongsTo(Planet, { foreingKey: "planetId", as: "planet" });
 
-module.exports = {Planet, Satelite}
+//Has Many
+Planet.hasMany(Satelite, { onDelete: "CASCADE", onUpdate: "CASCADE" });
+Satelite.belongsTo(Planet, { foreingKey: "planetId", as: "planet" });
+
+
+Cap.belongsToMany(Spaceship, {
+  foreingKey: "capId",
+  through: "capSpaceship",
+  as: "spaceships",
+});
+
+Spaceship.belongsToMany(Cap, {
+  foreingKey: "spaceshipId",
+  through: "capSpaceship",
+  as: "caps",
+});
+
+module.exports = { Planet, Satelite };

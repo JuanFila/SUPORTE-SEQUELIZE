@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("satelites", {
+    await queryInterface.createTable("spaceships", {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -13,16 +13,9 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      serial_number: {
+      capacity: {
         type: Sequelize.INTEGER,
         allowNull: false,
-      },
-      planetId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: { model: "planets", key: "id" },
-        onUpdate: "CASCADE",
-        onDelete: "CASCADE",
       },
       createdAt: {
         type: Sequelize.DATE,
@@ -34,6 +27,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("satelites");
+    await queryInterface.dropTable("spaceships");
   },
 };

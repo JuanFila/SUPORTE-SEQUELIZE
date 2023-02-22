@@ -9,13 +9,27 @@ module.exports= {
         const planet = await Planet.findByPk(planetId);
 
         if(!planet){
-            res.send("Esse planeta não existe")
+           return res.send("Esse planeta não existe")
         }else{
-            res.send(`O planeta ${name} foi encontrado`)
+           return res.send(`O satelite ${name} foi cadastrado no planeta ${planet.name}`)
         }
-        
-
         const satelite = await Satelite.create({name, serial_number, planetId});
         return res.json(satelite);
-    }
+        
+    },
+
+    async index(req,res) {
+        const {planetId} = await req.params;
+
+        if(!planetId){
+            res.send("Esse Planeta não existe!");
+        }
+
+        const planet = await Planet.findByPk(planetId, {
+            include: Satelite,
+        });
+
+        return res.json(planet);
+
+    },
 }
